@@ -44,12 +44,11 @@ const Home: NextPage = () => {
       const position = window.scrollY;
       setScrollPosition(position);
       
-      // Only apply parallax effect on larger screens (md and up)
+      // Минимальный эффект параллакса или полное отключение
       if (windowWidth >= 768) {
-        const scrollFactor = 0.6;
+        const scrollFactor = 0.05; // Минимальное значение для легкого эффекта
         parallaxRef.current.style.transform = `translate3d(0, ${position * scrollFactor}px, 0)`;
       } else {
-        // Reset transform for smaller screens
         parallaxRef.current.style.transform = 'none';
       }
     };
@@ -78,8 +77,8 @@ const Home: NextPage = () => {
           ref={parallaxRef}
           className="absolute inset-0 w-full will-change-transform"
           style={{
-            height: '150vh',
-            top: '-25vh',
+            height: '100vh',
+            top: '0',
             transform: windowWidth < 768 ? 'none' : undefined
           }}
           data-content-cover-parallax="fixed"
@@ -92,7 +91,8 @@ const Home: NextPage = () => {
               backgroundImage: 'url("https://static.tildacdn.com/tild3133-3935-4533-b831-306437663762/noroot.png")',
               backgroundSize: 'cover',
               backgroundRepeat: 'no-repeat',
-              backgroundPosition: windowWidth <= 414 ? 'center center' : 'center'
+              backgroundPosition: 'center',
+              transform: 'scale(1)',
             }}
           />
         </div>
